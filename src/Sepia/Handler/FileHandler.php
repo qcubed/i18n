@@ -45,7 +45,26 @@ class FileHandler implements HandlerInterface
     public function __construct($filepath)
     {
         if (file_exists($filepath) === false) {
-            throw new \Exception('PoParser: Input File does not exists: "' . htmlspecialchars($filepath) . '"');
+        	// is it a valid url?
+        	$body = @file_get_contents($filepath, NULL, stream_context_create(array(
+        		'http' => array(
+					'method' => "HEAD",
+					'ignore_errors' => 1,
+					'max_redirects' => 0
+				)
+        	)));
+        	if( ! empty ($http_response_header[0]) ){
+        		// should we check if response is 200?
+				/*
+				sscanf($http_response_header[0], 'HTTP/%*d.%*d %d', $code);
+				if( $code !== 200 ){
+					throw new \Exception('PoParser: Input File does not exists: "' . htmlspecialchars($filepath) . '"');
+				}
+				*/
+            } else { // nah...
+            	throw new \Exception('PoParser: Input File does not exists: "' . htmlspecialchars($filepath) . '"');
+            }
+            
         } elseif (is_readable($filepath) === false) {
             throw new \Exception('PoParser: File is not readable: "' . htmlspecialchars($filepath) . '"');
         }
