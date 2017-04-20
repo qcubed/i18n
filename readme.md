@@ -57,6 +57,7 @@ v5.0 (WIP)
 * `parseString()` and `parseFile()` converted to factory methods.
 * Removed method `updateEntry()` in favour of `setEntry()`.
 * Namespaced under `Sepia\PoParser`.
+* PSR-4.
 
 v4.2.1
 * Support multiline for plural entries (thanks @Ben-Ho)
