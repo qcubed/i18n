@@ -35,13 +35,13 @@ namespace Sepia;
 class StringHandler implements InterfaceHandler
 {
     protected $strings;
-    protected $line;
     protected $total;
+    protected $line;
 
-    public function __construct( $string )
+    public function __construct($string)
     {
         $this->line = 0;
-        $this->strings = explode("\n",$string);
+        $this->strings = explode("\n", $string);
         $this->total = count($this->strings);
     }
 
