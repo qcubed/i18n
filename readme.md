@@ -56,6 +56,7 @@ v5.0 (WIP)
 * Adds compatibility with `#~|` entries.
 * `parseString()` and `parseFile()` converted to factory methods.
 * Removed method `updateEntry()` in favour of `setEntry()`.
+* Namespaced under `Sepia\PoParser`.
 
 v4.2.1
 * Support multiline for plural entries (thanks @Ben-Ho)
