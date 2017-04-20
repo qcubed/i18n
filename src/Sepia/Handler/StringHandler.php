@@ -1,4 +1,4 @@
-<?php namespace Sepia\PoParser;
+<?php namespace Sepia\PoParser\Handler;
 
 /**
  *    Copyright (c) 2012 Raúl Ferràs raul.ferras@gmail.com
@@ -30,10 +30,47 @@
  *
  * https://github.com/raulferras/PHP-po-parser
  */
-interface InterfaceHandler
+class StringHandler implements HandlerInterface
 {
-    public function getNextLine();
-    public function ended();
-    public function close();
-    public function save($output);
+    protected $strings;
+    protected $total;
+    protected $line;
+
+    public function __construct($string)
+    {
+        $this->line = 0;
+        $this->strings = explode("\n", $string);
+        $this->total = count($this->strings);
+    }
+
+    public function getNextLine()
+    {
+        if (isset($this->strings[$this->line])) {
+            $result = $this->strings[$this->line];
+            $this->line++;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    public function ended()
+    {
+        return ($this->line>=$this->total);
+    }
+
+    public function close()
+    {
+        $this->line = 0;
+    }
+
+
+    /**
+     * @inheritdoc
+     *
+     * @param string $output
+     * @param array  $params
+     */
+    public function save($output, $params)
+    }
 }

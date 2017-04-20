@@ -1,4 +1,4 @@
-<?php namespace Sepia\PoParser;
+<?php namespace Sepia\PoParser\Handler;
 
 /**
  *    Copyright (c) 2012 Raúl Ferràs raul.ferras@gmail.com
@@ -30,7 +30,7 @@
  *
  * https://github.com/raulferras/PHP-po-parser
  */
-class FileHandler implements InterfaceHandler
+class FileHandler implements HandlerInterface
 {
     protected $fileHandle;
 
@@ -65,8 +65,43 @@ class FileHandler implements InterfaceHandler
     }
 
 
-    public function save($outputFile)
+    /**
+     * @inheritdoc
+     *
+     * @param string $output
+     * @param array  $params
+     */
+    public function save($output, $params)
     {
+        $outputFilePath = isset($params['filepath']) ? $params['filepath'] : null;
+        $fileHandle = null;
 
+        if ($outputFilePath) {
+            $fileHandle = @fopen($params['filepath'], 'w');
+            if ($fileHandle === false) {
+                throw new \RuntimeException(
+                    sprintf(
+                        'Could not open filename "%s" for writing.',
+                        $params['filepath']
+                    )
+                );
+            }
+        } else {
+            $fileHandle = $this->fileHandle;
+            if (is_resource($fileHandle) === false) {
+                throw new \RuntimeException(
+                    'No source file opened nor `filepath` parameter specified in FileHandler::save method.'
+                );
+            }
+        }
+
+        $bytesWritten = @fwrite($fileHandle, $output);
+        if ($bytesWritten === false) {
+            throw new \RuntimeException('Could not write data into file.');
+        }
+
+        if (isset($params['filepath'])) {
+            @fclose($fileHandle);
+        }
     }
 }
