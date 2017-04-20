@@ -1,6 +1,4 @@
-<?php
-
-namespace Sepia;
+<?php namespace Sepia\Poparser;
 
 /**
  *    Copyright (c) 2012 Raúl Ferràs raul.ferras@gmail.com
@@ -81,7 +79,7 @@ class PoParser
     }
 
 
-    public function __construct(InterfaceHandler $handler=null, $options=array())
+    public function __construct(InterfaceHandler $handler, $options=array())
     {
         $this->sourceHandle = $handler;
         $defaultOptions = array(
