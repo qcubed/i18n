@@ -548,15 +548,11 @@ class PoParser
             }
 
             if (isset($entry['tcomment'])) {
-                foreach ($entry['tcomment'] as $comment) {
-                    $output.= "# " . $comment . "\n";
-                }
+                $output.= '# ' . implode("\n".'# ', $entry['tcomment']) . "\n";
             }
 
             if (isset($entry['ccomment'])) {
-                foreach ($entry['ccomment'] as $comment) {
-                    $output.= '#. ' . $comment . "\n";
-                }
+                $output.= '#. ' . implode("\n#. ", $entry['ccomment']) . "\n";
             }
 
             if (isset($entry['reference'])) {
