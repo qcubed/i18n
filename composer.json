@@ -1,9 +1,9 @@
 {
-	"name"        : "sepia/po-parser",
+	"name"        : "qcubed/i18n",
 	"description" : "Gettext *.PO file parser for PHP.",
 	"type"        : "library",
 	"keywords"    : ["i18n","i10n","po","gettext"],
-	"homepage"    : "https://github.com/raulferras/PHP-po-parser",
+	"homepage"    : "https://github.com/qcubed/i18n",
 	"license"     : "MIT",
 	"authors"     : [
 				{
@@ -13,22 +13,17 @@
 				}
 				],
 	"support" : {
-		"issues" : "https://github.com/raulferras/PHP-po-parser/issues"
+		"issues" : "https://github.com/qcubed/i18n/issues"
 	},
 	"require" : {
 		"php": ">=5.5.0"
 	},
 	"require-dev" : {
-		"phpunit/phpunit": "4.8.*",
-        "squizlabs/php_codesniffer": "^2.3"
+		"phpunit/phpunit": "4.8.*"
 	},
 	"autoload" : {
 		"psr-4" : {
 			"Sepia\\PoParser\\": "src/Sepia/"
 		}
-	},
-	"scripts": {
-		"cs": "php vendor/bin/phpcs src --standard=PSR2 --colors",
-		"cs-fix": "php vendor/bin/phpcbf src --standard=PSR2 --colors"
 	}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<phpunit bootstrap="./vendor/autoload.php" colors="true">
+<phpunit bootstrap="../../autoload.php" colors="true">
 	<testsuites>
 		<testsuite name="Poparser test suite">
 			<directory>./tests</directory>

@@ -97,6 +97,6 @@ class StringHandler implements HandlerInterface
      * @param string $output
      * @param array  $params
      */
-    public function save($output, $params)
+    public function save($output, $params) {
     }
 }
