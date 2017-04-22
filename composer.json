@@ -1,6 +1,6 @@
 {
 	"name"        : "qcubed/i18n",
-	"description" : "Gettext *.PO file parser for PHP.",
+	"description" : "Comprehensive i18n project for translating PHP files.",
 	"type"        : "library",
 	"keywords"    : ["i18n","i10n","po","gettext"],
 	"homepage"    : "https://github.com/qcubed/i18n",
@@ -10,8 +10,14 @@
 					"name": "Raúl Ferràs",
 					"email": "raul.ferras@gmail.com",
 					"role" : "developer"
-				}
-				],
+				},
+                {
+                  "name": "Shannon Pekary",
+                  "email": "spekary@gmail.com",
+                  "role" : "developer"
+                }
+
+    ],
 	"support" : {
 		"issues" : "https://github.com/qcubed/i18n/issues"
 	},

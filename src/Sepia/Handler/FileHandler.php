@@ -1,4 +1,4 @@
-<?php namespace Sepia\PoParser\Handler;
+<?php
 
 /**
  *    Copyright (c) 2012 Raúl Ferràs raul.ferras@gmail.com
@@ -29,6 +29,13 @@
  *    POSSIBILITY OF SUCH DAMAGE.
  *
  * https://github.com/raulferras/PHP-po-parser
+ */
+
+namespace Sepia\PoParser\Handler;
+
+/**
+ * Class FileHandler
+ * @package Sepia\PoParser\Handler
  */
 class FileHandler implements HandlerInterface
 {

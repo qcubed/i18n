@@ -1,8 +1,6 @@
-<?php namespace Sepia\PoParser;
+<?php
 
-use Sepia\PoParser\Handler\FileHandler;
-use Sepia\PoParser\Handler\HandlerInterface;
-use Sepia\PoParser\Handler\StringHandler;
+namespace Sepia\PoParser;
 
 /**
  *    Copyright (c) 2012 Raúl Ferràs raul.ferras@gmail.com
@@ -33,7 +31,14 @@ use Sepia\PoParser\Handler\StringHandler;
  *    POSSIBILITY OF SUCH DAMAGE.
  *
  * https://github.com/raulferras/PHP-po-parser
- *
+ */
+
+
+use Sepia\PoParser\Handler\FileHandler;
+use Sepia\PoParser\Handler\HandlerInterface;
+use Sepia\PoParser\Handler\StringHandler;
+
+ /**
  * Class to parse .po file and extract its strings.
  *
  * @method array headers() deprecated
@@ -203,7 +208,7 @@ class Parser
     /**
      * Reads and parses strings of a .po file.
      *
-     * @return arrays List of entries found in .po file.
+     * @return array List of entries found in .po file.
      * @throws \Exception, \InvalidArgumentException
      */
     public function parse()
@@ -476,7 +481,7 @@ class Parser
      * @param String  $msgid    Id of entry. Be aware that some entries have a multiline msgid.
      *                          In that case \n must be replaced by the value of 'multiline-glue'
      *                          option (by default "<##EOL##>").
-     * @param Array   $entry     Array with all entry data. Fields not setted will be removed.
+     * @param array   $entry     Array with all entry data. Fields not setted will be removed.
      * @param boolean $createNew If msgid not found, it will create a new entry. By default true.
      *                           You want to set this to false if need to change the msgid of an entry.
      */
