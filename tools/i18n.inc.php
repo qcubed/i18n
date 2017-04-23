@@ -76,7 +76,6 @@ function _tp($strMsgId, $strMsgId_plural, $intNum, $strDomain = null, $strContex
 	return QCubed\I18n\TranslationService::instance()->translatePlural(
 		$strMsgId,
 		$strMsgId_plural,
-		$strDomain,
 		$intNum,
 		$strDomain,
 		$strContext);

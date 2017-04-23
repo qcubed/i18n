@@ -29,7 +29,8 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Sepia\\PoParser\\": "src/Sepia/"
+			"Sepia\\PoParser\\": "src/Sepia/",
+          "QCubed\\I18n": "src/"
 		}
 	}
 }

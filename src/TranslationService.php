@@ -170,9 +170,15 @@ class TranslationService {
 	 * So that you can use a PACKAGIST package name as a domain, we clean it up so that this string doesn't look like
 	 * a potential windows directory.
 	 *
-	 * @param $strDomain
+	 * @param string|null $strDomain
+	 * @return string|null
 	 */
 	public static function cleanDomain($strDomain) {
-		return str_replace(['\\', '/'], '.', $strDomain);
+		if ($strDomain) {
+			return str_replace(['\\', '/'], '.', $strDomain);
+		}
+		else {
+			return $strDomain;
+		}
 	}
 }

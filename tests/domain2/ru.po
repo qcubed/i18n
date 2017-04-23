@@ -1,0 +1,152 @@
+# QCubed Distributed Language File
+# for Russian (default)
+# Contributed by "olegabr"
+
+
+
+# For QTextBoxBase controls
+msgid "%s is required"
+msgstr "необходимо задать %s"
+
+msgid "Required"
+msgstr "Требуется"
+
+msgid "%s must have at least %s characters"
+msgstr "%s должен состоять как минимум из %s символов"
+
+msgid "Must have at least %s characters"
+msgstr "Должен состоять как минимум из %s символов"
+
+msgid "%s must have at most %s characters"
+msgstr "%s должен состоять максимум из %s символов"
+
+msgid "Must have at most %s characters"
+msgstr "Должен состоять максимум из %s символов"
+
+# For QWriteBox controls
+msgid ""
+"Tags &lt;b&gt; &lt;u&gt; &lt;i&gt; &lt;br&gt; &lt;code&gt; and &lt;http://...&gt; are allowed.  "
+"Use ** at the beginning of any line for a bulleted list."
+msgstr ""
+"Tags &lt;b&gt; &lt;u&gt; &lt;i&gt; &lt;br&gt; &lt;code&gt; and &lt;http://...&gt; are allowed.  "
+"Use ** at the beginning of any line for a bulleted list."
+
+
+# For QPaginatedControl controls
+msgid "item"
+msgstr "элемент"
+
+msgid "items"
+msgstr "элементы"
+
+
+# For QListBox and QCalendar controls
+msgid "Reset"
+msgstr "Сбросить"
+
+
+# For ListBoxes in Generated Forms
+msgid "- Select One -"
+msgstr "- Выберите -"
+
+
+# For QIntegerTextBox and QFloatTextBox controls
+msgid "Invalid Integer"
+msgstr "Неверное целое число"
+
+msgid "Invalid Float"
+msgstr "Неверное число"
+
+msgid "Value must be less than %s"
+msgstr "Значение должно быть меньше %s"
+
+msgid "Value must be greater than %s"
+msgstr "Значение должно быть больше %s"
+
+
+# For QDataGrid controls
+msgid "<b>Results:</b>&nbsp;Viewing&nbsp;%s&nbsp;%s-%s&nbsp;of&nbsp;%s."
+msgstr "<b>Результат:</b>&nbsp;Показаны&nbsp;%s&nbsp;%s-%s&nbsp;из&nbsp;%s."
+
+msgid "<b>Results:</b> No %s found."
+msgstr "<b>Результат:</b> %s не найдены."
+
+msgid "<b>Results:</b> 1 %s found."
+msgid_plural "<b>Results:</b> %s %s found."
+msgstr[0] "<b>Результат:</b> найден 1 %s."
+msgstr[1] "<b>Результат:</b> найдено %s %s."
+
+msgid "Filter"
+msgstr "Фильтровать"
+
+# For QPaginator controls
+msgid "Previous"
+msgstr "Назад"
+
+msgid "Next"
+msgstr "Вперёд"
+
+
+# For the List FormDraft Include template
+msgid "List All"
+msgstr "Показать все"
+
+msgid "Create a New"
+msgstr "Создать"
+
+msgid "Go to \"Form Drafts\""
+msgstr "Перейти к списку таблиц"
+
+
+# For the Edit FormBase class template
+msgid "Create"
+msgstr "Создать"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Are you SURE you want to DELETE this %s?"
+msgstr "Вы действительно хотите удалить этот %s?"
+
+msgid "Are you SURE you want to DELETE this"
+msgstr "Вы действительно хотите удалить этот"
+
+# For the form_drafts/index.php page
+msgid "List of Form Drafts"
+msgstr "Список таблиц"
+
+msgid "View List"
+msgstr "Просмотреть записи"
+
+msgid "Create New"
+msgstr "Создать запись"
+
+msgid "?"
+msgstr "?"
+
+msgid "True"
+msgstr "Да"
+
+msgid "False"
+msgstr "Нет"
+
+msgid "Set"
+msgstr "Установлено"
+
+msgid "Unset"
+msgstr "Не установлено"
+
+msgid "N/A"
+msgstr "Недоступно"
+
+msgid "Already in Use"
+msgstr "Уже используется. Введите другое значение."

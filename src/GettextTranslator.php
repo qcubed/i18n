@@ -121,7 +121,7 @@ class GettextTranslator implements TranslatorInterface {
 	 * @param string $strDomain
 	 * @param string $strDirectory
 	 * @param string|null $strCharset
-	 * @return void
+	 * @return $this
 	 */
 	public function bindDomain ($strDomain, $strDirectory, $strCharset = null)
 	{
@@ -133,21 +133,30 @@ class GettextTranslator implements TranslatorInterface {
 			bind_textdomain_codeset($strDomain, 'UTF-8');
 			$this->charset = $strCharset;
 		}
+		return $this;
 	}
 
 	/**
 	 * Set the default domain.
 	 *
 	 * @param $strDomain
-	 * @return void
+	 * @return $this
 	 */
 	public function setDefaultDomain($strDomain)
 	{
 		$strDomain = TranslationService::cleanDomain($strDomain);
 		textdomain($strDomain);
+		return $this;
 	}
 
 
+	/**
+	 * Set the language. If doing this with a builder pattern, do this last.
+	 *
+	 * @param string $strLanguage
+	 * @param string|null $strCountry
+	 * @return void
+	 */
 	public function setLanguage ($strLanguage, $strCountry = null)
 	{
 		$locale = $strLanguage;
