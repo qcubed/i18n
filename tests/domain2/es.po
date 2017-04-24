@@ -126,3 +126,8 @@ msgstr "Ago"
 
 msgid "Dec"
 msgstr "Dic"
+
+msgid "Line 1\n"
+"Line 2"
+msgstr "Línea 1\n"
+"Línea 2"

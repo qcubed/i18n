@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * The most basic of tests, with no caching at all, so all translations are memory resident.
+ */
 
 // TODO: Remove these once we can get them in composer's autoloader
 require_once (__DIR__ . "/../src/TranslatorInterface.php");
@@ -8,13 +11,9 @@ require_once (__DIR__ . "/../src/SimpleCacheTranslator.php");
 
 require_once (__DIR__ . "/../tools/i18n.inc.php"); // keep this
 
-use Sepia\PoParser\Parser;
-use Sepia\PoParser\Handler\FileHandler;
-use Sepia\PoParser\Handler\StringHandler;
-
 use QCubed\I18n\TranslationService as TService;
 
-class SimpleCacheTest extends \PHPUnit_Framework_TestCase
+class SCTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
@@ -47,8 +46,27 @@ class SimpleCacheTest extends \PHPUnit_Framework_TestCase
 	}
 
 	public function testPlural() {
+		$str = _tp("<b>Results:</b> 1 %s found.", "<b>Results:</b> %s %s found.", 1);
+		$this->assertEquals("<b>Resultados:</b> Hay 1 %s.", $str);
+
 		$str = _tp("<b>Results:</b> 1 %s found.", "<b>Results:</b> %s %s found.", 2);
 		$this->assertEquals("<b>Resultados:</b> Hay %s %s.", $str);
 	}
 
+	/**
+	 * The programmer should be able to embed newlines in translated text, and the translator
+	 * should see these as escaped \n in the translation
+	 */
+	public function testMultiline() {
+		$str = _t("Line 1\nLine 2");
+		$this->assertEquals("Línea 1\nLínea 2", $str);
+	}
+
+	public function testDomainAndContext() {
+		$str = _t("Welcome", "dom1", "Welcome panel");
+		$this->assertEquals("Bienvenidos", $str);
+
+		$str = _t("Welcome", "dom1", "Howdy");
+		$this->assertEquals("Hola", $str);
+	}
 }

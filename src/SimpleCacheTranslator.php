@@ -45,16 +45,22 @@ use Sepia\PoParser\Parser;
  *
  * @see http://www.php-fig.org/psr/psr-16/
  *
- * This has a couple of layers of functionality.
+ * This has a couple of layers of functionality. You actually don't need to provide a cache, but its better if you do.
+ * If you do not provide a cache, it will directly read .PO language files. If you do provide a cache, it will store
+ * translations in the cache and look them up as needed. Without a cache, you could get some file thrashing as every
+ * time PHP starts up, the language files will be read.
+ *
+ * Will detect if an entry is removed from the cache, and will load the associated language file if that happens. So, if
+ * your cache is running low on memory and starts swapping out entries, that could cause some thrashing too.
  *
  * If you provide a temporary directory, it will read and pre-process your .po files, saving them into your directory
- * in a format it can get to easily. That will speed up subsequent reads.
+ * in a format it can get to easily (JSON currently). That will speed up subsequent reads and help a bit with file thrashing.
+ * Will detect if a .po file gets updated and process the file without you needing to reboot the server.
  *
- * In addition, if you provide a cache that implements the PSR-16 SimpleCache interface, it will also process and save
- * the po files in the cache for later retriaval, which is even faster. One caveate though: do not use a cache that
- * might discard random entries from the cache (like APC). Instead use a cache that is backed by a database so nothing
- * is lost. There is no easy way for us to determine if an entry was removed, or was never put in the cache in the first place.
+ * Currently only supports UTF-8 .PO files.
  *
+ * TODO: Implement a version using https://github.com/sevenval/SHMT This will be faster, as all accesses are memory mapped,
+ * and no entries will be removed, so no file trashing problems!
  *
  * @package QCubed\I18n
  */
@@ -105,6 +111,17 @@ class SimpleCacheTranslator implements TranslatorInterface {
 	}
 
 	/**
+	 * Clears the cache, forcing a reload of the cache from temp files, or po files if temp files don't exist
+	 */
+	public function clearCache() {
+		if ($this->cache) {
+			$this->cache->clear();
+		} else {
+			$this->translations = null;
+		}
+	}
+
+	/**
 	 * Set the temporary directory.
 	 *
 	 * @param $strTempDir
@@ -119,15 +136,13 @@ class SimpleCacheTranslator implements TranslatorInterface {
 	}
 
 	/**
-	 * Binds the given domain to the directory, and optionally allows the charset to be defined.
+	 * Binds the given domain to the directory.
 	 *
 	 * In this version, we are going to assume that the domain is the same as a Packagist package name,
-	 * and we are pointing to a directory full of .po files and/or .php array files. The standard Gettext directory
-	 * structure is a little unwieldy (though it does make merging a little easier).
+	 * and we are pointing to a directory full of .po files, with each file named by language code and optionally country
+	 * code. (en.po, es.po, de_ch.po, etc.)
 	 *
 	 * Always bind your directories before setting the language, or it will not be able to find your language files.
-	 *
-	 * If you are using a cache that is pre-loaded, you don't need to do this.
 	 *
 	 * @param string $strDomain
 	 * @param string $strDirectory
@@ -195,17 +210,9 @@ class SimpleCacheTranslator implements TranslatorInterface {
 			$strDomain = $this->strDefaultDomain;
 		}
 
-		$strNewMsgId = static::getKey($strMsgId, $strDomain, $strContext, $this->strLocale, null, $this->blnMsgIdRequiresCleaning);
+		$key = static::getKey($strMsgId, $strDomain, $strContext, $this->strLocale, null, $this->blnMsgIdRequiresCleaning);
 
-		if ($this->cache) {
-			return $this->cache->get($strNewMsgId, $strMsgId);
-		}
-		elseif ($this->translations) {
-			return $this->translations[$strNewMsgId];
-		}
-
-		// default
-		return $strMsgId;
+		return $this->getEntry($key, $strMsgId, $strDomain);
 	}
 
 	/**
@@ -227,20 +234,19 @@ class SimpleCacheTranslator implements TranslatorInterface {
 		$offset = $this->pluralNumToOffset($intNum);
 
 		if (!$offset) {
-			$strNewMsgId = static::getKey($strMsgId, $strDomain, $strContext, $this->strLocale, null, $this->blnMsgIdRequiresCleaning);
+			$key = static::getKey($strMsgId, $strDomain, $strContext, $this->strLocale, null, $this->blnMsgIdRequiresCleaning);
 		}
 		else {
-			$strNewMsgId = static::getKey($strMsgId_plural, $strDomain, $strContext, $this->strLocale, $offset, $this->blnMsgIdRequiresCleaning);
+			$key = static::getKey($strMsgId_plural, $strDomain, $strContext, $this->strLocale, $offset, $this->blnMsgIdRequiresCleaning);
 		}
 
-		if ($this->cache) {
-			return $this->cache->get($strNewMsgId, $strMsgId);
-		}
-		elseif ($this->translations) {
-			return $this->translations[$strNewMsgId];
+		$strTranslation = $this->getEntry($key, null, $strDomain);
+
+		if ($strTranslation !== null) {
+			return $strTranslation;
 		}
 
-		// Do the default if nothing is configured
+		// Do the default if nothing is working
 		if ($intNum == 1) {
 			return $strMsgId;
 		}
@@ -300,7 +306,7 @@ class SimpleCacheTranslator implements TranslatorInterface {
 
 		if ($blnRequiresCleaning) {
 			$strNewMsgId = preg_replace(
-				'/^[A-Z][a-z][0-9.][:space:]/u',
+				'/^[A-Z][a-z][0-9.][\s]/u',
 				'',
 				$strMsgId,
 				-1,
@@ -308,7 +314,7 @@ class SimpleCacheTranslator implements TranslatorInterface {
 			);
 
 			$strNewMsgId = preg_replace(
-				'/[:space:]/u',
+				'/[\s]/u',
 				'_',
 				$strNewMsgId
 			);
@@ -362,6 +368,13 @@ class SimpleCacheTranslator implements TranslatorInterface {
 		}
 	}
 
+	/**
+	 * Load a file for a particular domain in the current locale.
+	 *
+	 * TODO: implement fallbacks when the current locale does not exist, but there is a related language. In particular, if the country code is specified, but not available.
+	 *
+	 * @param string $strDomain
+	 */
 	protected function loadDomain($strDomain)
 	{
 		$strPoName = $this->strLocale . '.po';
@@ -374,8 +387,10 @@ class SimpleCacheTranslator implements TranslatorInterface {
 			// Check if temp dir has more recent cached version of this file
 			if ($this->strTempDir) {
 				$strTempFileName = $this->getTempFileName($strDomain);
-				$tempModTime = filemtime($strTempFileName);
-				if ($tempModTime !== false && $tempModTime > $poModTime) {
+				if (file_exists($strTempFileName) &&
+					($tempModTime = filemtime($strTempFileName)) &&
+					$tempModTime > $poModTime)
+				{
 					$this->loadTempFile($strDomain, $poModTime);
 				}
 				else {
@@ -466,7 +481,7 @@ class SimpleCacheTranslator implements TranslatorInterface {
 	 *
 	 * @param string $strKey		Key from getKey
 	 * @param string $strMsgId		This is the corresponding msgid being asked for. It also serves as the default value if the key is not found.
-	 * @param  string$strDomain	The domain to search if the key is not in the cache. We need to make sure the key was not removed by the cache.
+	 * @param string $strDomain	The domain to search if the key is not in the cache. We need to make sure the key was not removed by the cache.
 	 * @return string
 	 */
 	protected function getEntry($strKey, $strMsgId, $strDomain)
@@ -594,6 +609,9 @@ class SimpleCacheTranslator implements TranslatorInterface {
 	 */
 	protected function writeTempFile($data, $strDomain)
 	{
+		if (!file_exists($this->strTempDir . '/' . $this->strLocale)) {
+			mkdir ($this->strTempDir . '/' . $this->strLocale);
+		}
 		// Stackexhchange lore suggests that json encode is the fastest way to do this using standard PHP calls,
 		// though igbinary may be even faster, but we don't want to make that a dependency at this point.
 		$strEncodedData = json_encode($data);

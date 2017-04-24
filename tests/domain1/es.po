@@ -16,6 +16,9 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 1.5.7\n"
 
+msgid "Yes"
+msgstr "Si"
+
 #: wp-admin/custom-background.php:305
 msgctxt "Background Attachment"
 msgid "Attachment"
@@ -29,7 +32,7 @@ msgstr "1"
 #: wp-admin/includes/screen.php:956
 msgctxt "Welcome panel"
 msgid "Welcome"
-msgstr "Hola"
+msgstr "Bienvenidos"
 
 #: wp-admin/includes/schema.php:355
 msgctxt "default GMT offset or timezone string"
@@ -57,24 +60,3 @@ msgstr "Las imágenes deben ser de al menos <strong>%1$d pixels</strong> de altu
 msgctxt "Howdy"
 msgid "Welcome"
 msgstr "Hola"
-
-#: wp-admin/edit.php:238
-msgid "%s post not updated,"
-"somebody is editing it."
-msgid_plural "%s posts not updated,"
-"somebody is editing them."
-msgstr[0] "%s entrada no actualizada,"
-"alguien la está editando."
-msgstr[1] "%s entradas no actualizadas,"
-"alguien las está editando."
-
-#: wp-admin/edit.php:239
-msgid ""
-"%s post permanently deleted."
-msgid_plural "%s posts permanently deleted."
-msgstr[0] ""
-"%s entrada borrada"
-"permanentemente."
-msgstr[1] ""
-"%s entradas borradas"
-"permanentemente."
