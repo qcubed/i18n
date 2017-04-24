@@ -1,0 +1,133 @@
+# QCubed Distributed Language File
+# for Spanish (Generic)
+# Contributed by Nino Dafonte <nino.dafonte@gmail.com>
+
+
+# For QTextBoxBase controls
+msgid "%s is required"
+msgstr "%s es obligatorio"
+
+msgid "Required"
+msgstr "Obligatorio"
+
+
+# For QWriteBox controls
+msgid ""
+"Tags &lt;b&gt; &lt;u&gt; &lt;i&gt; &lt;br&gt; &lt;code&gt; and &lt;http://...&gt; are allowed.  "
+"Use ** at the beginning of any line for a bulleted list."
+msgstr ""
+"Etiquetas &lt;b&gt; &lt;u&gt; &lt;i&gt; &lt;br&gt; &lt;code&gt; y &lt;http://...&gt; están permitidas.  "
+"Use ** al comienzo de cada linea para una lista por puntos."
+
+
+# For QPaginatedControl controls
+msgid "item"
+msgstr "artículo"
+
+msgid "items"
+msgstr "artículos"
+
+
+# For QListBox and QCalendar controls
+msgid "Reset"
+msgstr "Borrar"
+
+
+# For ListBoxes in Generated Forms
+msgid "- Select One -"
+msgstr "- Seleccione Uno -"
+
+
+# For QIntegerTextBox and QFloatTextBox controls
+msgid "Invalid Integer"
+msgstr "Número entero no válido"
+
+msgid "Invalid Float"
+msgstr "Número decimal no válido"
+
+msgid "Value must be less than %s"
+msgstr "El valor debe ser menor de %s"
+
+msgid "Value must be greater than %s"
+msgstr "El valor debe ser mayor de %s"
+
+
+# For QDataGrid controls
+msgid "<b>Results:</b>&nbsp;Viewing&nbsp;%s&nbsp;%s-%s&nbsp;of&nbsp;%s."
+msgstr "<b>Resultados:</b>&nbsp;Mostrando&nbsp;%s&nbsp;%s-%s&nbsp;de&nbsp;%s."
+
+msgid "<b>Results:</b> No %s found."
+msgstr "<b>Resultados:</b> No se ha encontrado ningú %s."
+
+msgid "<b>Results:</b> 1 %s found."
+msgid_plural "<b>Results:</b> %s %s found."
+msgstr[0] "<b>Resultados:</b> Hay 1 %s."
+msgstr[1] "<b>Resultados:</b> Hay %s %s."
+
+
+# For QPaginator controls
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Siguiente"
+
+
+# For the List FormDraft Include template
+msgid "List All"
+msgstr "Mostrar Todos"
+
+msgid "Create a New"
+msgstr "Crear uno Nuevo"
+
+msgid "Go to \"Form Drafts\""
+msgstr "Ir a \"Formularios Modelo\""
+
+
+# For the Edit FormBase class template
+msgid "Create"
+msgstr "Crear"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Are you SURE you want to DELETE this %s?"
+msgstr "Está SEGURO de querer BORRAR este %s?"
+
+
+# For the form_drafts/index.php page
+msgid "List of Form Drafts"
+msgstr "Lista de Formularios Modelo"
+
+msgid "View List"
+msgstr "Mostrar Lista"
+
+msgid "Create New"
+msgstr "Crear Nuevo"
+
+#For QDateTimePicker control
+msgid "Jan"
+msgstr "Ene"
+
+msgid "Apr"
+msgstr "Abr"
+
+msgid "Aug"
+msgstr "Ago"
+
+msgid "Dec"
+msgstr "Dic"
+
+msgid "Line 1\n"
+"Line 2"
+msgstr "Línea 1\n"
+"Línea 2"

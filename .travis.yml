@@ -10,4 +10,4 @@ before_script:
   - composer update --prefer-source; composer install --dev --prefer-source;
 
 script:
-  - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml
+  - ./vendor/bin/phpunit -c ./test/phpunit.xml --coverage-clover ./build/logs/clover.xml
