@@ -63,9 +63,29 @@ interface TranslatorInterface {
 
 	/**
 	 * Set the language and country code.
+	 *
 	 * @param string $strLanguage Language code (e.g. en, fr)
 	 * @param string|null $strCountry Country code (e.g. us) (Optional)
-	 * @return mixed
+	 * @return TranslatorInterface
 	 */
 	public function setLanguage ($strLanguage, $strCountry);
+
+	/**
+	 * Tell us where to find the translations for a particular directory. Some translators will support multiple
+	 * charsets, and some only UTF-8.
+	 *
+	 * @param string $strDomain
+	 * @param string $strDirectory
+	 * @param string $strCharset
+	 * @return TranslatorInterface
+	 */
+	public function bindDomain ($strDomain, $strDirectory, $strCharset = 'UTF-8');
+
+	/**
+	 * Set the domain to use when no domain is specified during translation.
+	 *
+	 * @param string $strDomain
+	 * @return TranslatorInterface
+	 */
+	public function setDefaultDomain($strDomain);
 }

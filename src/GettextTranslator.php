@@ -123,14 +123,14 @@ class GettextTranslator implements TranslatorInterface {
 	 * @param string|null $strCharset
 	 * @return $this
 	 */
-	public function bindDomain ($strDomain, $strDirectory, $strCharset = null)
+	public function bindDomain ($strDomain, $strDirectory, $strCharset = 'UTF-8')
 	{
 		$strDomain = TranslationService::cleanDomain($strDomain);
 		assert(file_exists($strDirectory), "i18n directory does not exist");
 		bindtextdomain($strDomain, $strDirectory);
 
 		if ($strCharset) {
-			bind_textdomain_codeset($strDomain, 'UTF-8');
+			bind_textdomain_codeset($strDomain, $strCharset);
 			$this->charset = $strCharset;
 		}
 		return $this;

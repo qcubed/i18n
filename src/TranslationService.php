@@ -50,7 +50,7 @@ namespace QCubed\I18n;
  * TranslationService::instance()->setTranslator(new MyTranslator());
  * TranslationService::instance()->setLanguage ('en', 'us);
  *
- * To translate (See i18n.inc.php)
+ * To translate (See i18n-app.inc.php)
  * $str = _t("A message to translate");
  *
  * @package QCubed\I18n
@@ -158,12 +158,12 @@ class TranslationService {
 	 *
 	 * @param string $strLanguage
 	 * @param string|null $strCountry
+	 * @return $this
 	 */
 	public function setLanguage ($strLanguage, $strCountry = null)
 	{
-		if ($this->translator) {
-			$this->translator->setLanguage($strLanguage, $strCountry);
-		}
+		$this->translator->setLanguage($strLanguage, $strCountry);
+		return $this;
 	}
 
 	/**
@@ -173,7 +173,7 @@ class TranslationService {
 	 * @param string|null $strDomain
 	 * @return string|null
 	 */
-	public static function cleanDomain($strDomain) {
+	public static function cleanDomain ($strDomain) {
 		if ($strDomain) {
 			return str_replace(['\\', '/'], '.', $strDomain);
 		}
@@ -181,4 +181,29 @@ class TranslationService {
 			return $strDomain;
 		}
 	}
+
+	/**
+	 * @param string $strDomain
+	 * @param string $strDirectory
+	 * @param string $strCharset
+	 * @return $this
+	 */
+	public function bindDomain ($strDomain, $strDirectory, $strCharset = 'UTF-8')
+	{
+		$this->translator->bindDomain($strDomain, $strDirectory, $strCharset);
+		return $this;
+	}
+
+	/**
+	 * @param string $strDomain
+	 * @param string $strDirectory
+	 * @param string $strCharset
+	 * @return $this
+	 */
+	public function setDefaultDomain ($strDomain)
+	{
+		$this->translator->setDefaultDomain($strDomain);
+		return $this;
+	}
+
 }

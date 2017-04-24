@@ -1,6 +1,6 @@
 <?php
 /**
- * This is a convenience file to include in your project. It brings common shortcuts for translation into the global
+ * This is a convenience file to include in your application project. It brings common shortcuts for translation into the global
  * space, similar to how the gettext PHP plugin works. You can either use it, or make up your own to do something similar,
  * like if you are using a service container for dependency injection.
  *
@@ -49,7 +49,7 @@
  */
 function _t($strMsgId, $strDomain = null, $strContext = null)
 {
-	return QCubed\I18n\TranslationService::instance()->translate($strMsgId, $strDomain, $strContext);
+	return \QCubed\I18n\TranslationService::instance()->translate($strMsgId, $strDomain, $strContext);
 }
 
 /**
@@ -73,7 +73,7 @@ function _t($strMsgId, $strDomain = null, $strContext = null)
  */
 function _tp($strMsgId, $strMsgId_plural, $intNum, $strDomain = null, $strContext = null)
 {
-	return QCubed\I18n\TranslationService::instance()->translatePlural(
+	return \QCubed\I18n\TranslationService::instance()->translatePlural(
 		$strMsgId,
 		$strMsgId_plural,
 		$intNum,

@@ -54,22 +54,32 @@ making subsequent reads faster.
 ##Typical Use
 ###Setup
 ```php
-		$cache = new MyCache();
-		$translator = new \QCubed\I18n\SimpleCacheTranslator($cache);
+$cache = new MyCache();
+$translator = new \QCubed\I18n\SimpleCacheTranslator($cache);
 
-		$translator->bindDomain('package/subpackage', __VENDOR_DIR__ . "/package/subpackage/I18n") // directory of .po files
-			->bindDomain('project', __PROJECT_DIR__ . "/I18n") // pointer to your specific translations
-			->setDefaultDomain('project') // get translations from here if no domain is specified
-			->setCache($cache)
-			->setTempDir($tempDirPath);
+$translator->bindDomain('package/subpackage', __VENDOR_DIR__ . "/package/subpackage/I18n") // directory of .po files
+	->bindDomain('project', __PROJECT_DIR__ . "/I18n") // pointer to your specific translations
+	->setDefaultDomain('project') // get translations from here if no domain is specified
+	->setCache($cache)
+	->setTempDir($tempDirPath);
 
-		\QCubed\I18n\TranslationService::instance()->setTranslator($translator);
-		\QCubed\I18n\TranslationService::instance()->setLanguage('es'); //Make a particular language the active language.
+\QCubed\I18n\TranslationService::instance()->setTranslator($translator);
+\QCubed\I18n\TranslationService::instance()->setLanguage('es'); //Make a particular language the active language.
+```
 
+###Including the helper library
+For applications:
+```php
+include ("i18n-app.inc.php");
+```
+
+If you are developing a library to be used by other applications:
+```php
+include ("i18n-lib.inc.php");
 ```
 
 ###Getting a translation
-```
+```php
 $str = _t("Hello");	// translate Hello into the currently active translation using the default domain (that is, the .po file from your project for the default language)
 $str = _t("Hello", "package/subpackage", "a context"); // get a translation using a domain and context
 $str = _tp("A Hello to your", "Many hellos to you", $n);	// Do a plural translation based on the integer $n
@@ -84,4 +94,5 @@ there somewhere already for this. Try php-gettext first.
 * Implement language specific pluralize for languages with more than one plural form. Again,
 the code is out there to help with this, just need to pull it in.
 * Either reference or pull in other helpful code, like to do .po file updates and merges,
-perhaps somewhat automated using .po comments to correlate the source of a string.
+perhaps somewhat automated using .po comments to correlate the source of a string. The PoParser library
+included here can write out PO files, and so can help with this.

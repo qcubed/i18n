@@ -9,7 +9,7 @@ require_once (__DIR__ . "/../src/TranslatorInterface.php");
 require_once (__DIR__ . "/../src/TranslationService.php");
 require_once (__DIR__ . "/../src/SimpleCacheTranslator.php");
 
-require_once (__DIR__ . "/../tools/i18n.inc.php"); // keep this
+require_once (__DIR__ . "/../tools/i18n-app.inc.php"); // keep this
 
 use QCubed\I18n\TranslationService as TService;
 
@@ -41,15 +41,15 @@ class SCTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testBasicTranslation() {
-		$str = _t("Required");
+		$str = \_t("Required");
 		$this->assertEquals("Obligatorio", $str);
 	}
 
 	public function testPlural() {
-		$str = _tp("<b>Results:</b> 1 %s found.", "<b>Results:</b> %s %s found.", 1);
+		$str = \_tp("<b>Results:</b> 1 %s found.", "<b>Results:</b> %s %s found.", 1);
 		$this->assertEquals("<b>Resultados:</b> Hay 1 %s.", $str);
 
-		$str = _tp("<b>Results:</b> 1 %s found.", "<b>Results:</b> %s %s found.", 2);
+		$str =\ _tp("<b>Results:</b> 1 %s found.", "<b>Results:</b> %s %s found.", 2);
 		$this->assertEquals("<b>Resultados:</b> Hay %s %s.", $str);
 	}
 
@@ -58,15 +58,15 @@ class SCTest extends \PHPUnit_Framework_TestCase
 	 * should see these as escaped \n in the translation
 	 */
 	public function testMultiline() {
-		$str = _t("Line 1\nLine 2");
+		$str = \_t("Line 1\nLine 2");
 		$this->assertEquals("Línea 1\nLínea 2", $str);
 	}
 
 	public function testDomainAndContext() {
-		$str = _t("Welcome", "dom1", "Welcome panel");
+		$str = \_t("Welcome", "dom1", "Welcome panel");
 		$this->assertEquals("Bienvenidos", $str);
 
-		$str = _t("Welcome", "dom1", "Howdy");
+		$str = \_t("Welcome", "dom1", "Howdy");
 		$this->assertEquals("Hola", $str);
 	}
 }

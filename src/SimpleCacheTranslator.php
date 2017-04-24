@@ -38,6 +38,7 @@ namespace QCubed\I18n;
 use Psr\SimpleCache;
 use Sepia\PoParser\Parser;
 
+
 /**
  * Class SimpleCacheTranslator
  *
@@ -142,20 +143,23 @@ class SimpleCacheTranslator implements TranslatorInterface {
 	 * and we are pointing to a directory full of .po files, with each file named by language code and optionally country
 	 * code. (en.po, es.po, de_ch.po, etc.)
 	 *
-	 * Always bind your directories before setting the language, or it will not be able to find your language files.
-	 *
 	 * @param string $strDomain
 	 * @param string $strDirectory
+	 * @param string $strCharset		Currently ignored
 	 * @return $this
 	 */
-	public function bindDomain ($strDomain, $strDirectory)
+	public function bindDomain ($strDomain, $strDirectory, $strCharset = 'UTF-8')
 	{
 		$strDomain = TranslationService::cleanDomain($strDomain);
 
-		assert(file_exists($strDirectory), "i18n directory does not exist");
+		assert(file_exists($strDirectory), "i18n directory " . $strDirectory . " does not exist");
 		$this->domains[$strDomain] = $strDirectory;
 
 		// TODO: Should we support alternate charsets, or just tell everyone to encode into UTF-8?
+
+		if ($this->strLocale) {	// The language has already been set, so we need to import the PO file
+			$this->loadDomain($strDomain);
+		}
 		return $this;
 	}
 
