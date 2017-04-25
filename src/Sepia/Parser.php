@@ -108,8 +108,13 @@ class Parser
      */
     public static function parseFile($filepath, $options = array())
     {
-        $parser = new Parser(new FileHandler($filepath), $options);
-        $parser->parse();
+    	try {
+			$parser = new Parser(new FileHandler($filepath), $options);
+			$parser->parse();
+		}
+		catch (\Exception $e) {
+    		throw new \Exception ($e->getMessage() . " in file: " . $filepath);
+		}
 
         return $parser;
     }
