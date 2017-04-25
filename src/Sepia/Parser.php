@@ -267,6 +267,8 @@ class Parser
             $justNewEntry = false;
             $data         = isset($split[1]) ? $split[1] : null;
 
+			var_dump($key); var_dump($state);
+
             switch ($key) {
                 // Flagged translation
                 case '#,':
