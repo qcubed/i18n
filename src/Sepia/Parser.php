@@ -400,6 +400,9 @@ class Parser
                             case 'msgid':
                             case 'msgid_plural':
                             case (strpos($state, 'msgstr[') !== false):
+                            	if (!isset($entry[$state])) {
+                            		throw new \Exception('Missing state:' . $state);
+								}
                                 if (is_string($entry[$state])) {
                                     // Convert it to array
                                     $entry[$state] = array($entry[$state]);

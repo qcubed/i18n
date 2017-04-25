@@ -79,7 +79,10 @@ class SCFileTest extends SCTest
 	 * we are recreating the php file when the .po file is newer
 	 */
 	public function testTouch() {
-		copy(__DIR__ . '/touchTest/dom1.php', $this->strTestPath . '/es/dom1.php');
+		$srcPath = __DIR__ . '/touchTest/dom1.php';
+		$destPath = $this->strTestPath . '/es/dom1.php';
+
+		copy($srcPath, $destPath);
 		clearstatcache(true);
 		sleep(1); // prevent same mod date as other files
 		touch($this->strTestPath . '/es/dom1.php');
