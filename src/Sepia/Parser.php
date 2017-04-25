@@ -267,7 +267,7 @@ class Parser
             $justNewEntry = false;
             $data         = isset($split[1]) ? $split[1] : null;
 
-			var_dump($key); var_dump($state);
+			//var_dump($key); var_dump($state);
 
             switch ($key) {
                 // Flagged translation
@@ -401,7 +401,6 @@ class Parser
                             case 'msgctxt':
                             case 'msgid':
                             case 'msgid_plural':
-                            case (strpos($state, 'msgstr[') !== false):
                             	if (!isset($entry[$state])) {
                             		throw new \Exception('Missing state:' . $state);
 								}
@@ -422,9 +421,27 @@ class Parser
                                 break;
 
                             default:
-                                throw new \Exception(
-                                    'PoParser: Parse error! Unknown key "' . $key . '" on line ' . ($lineNumber+1)
-                                );
+                            	if (!empty($state) && (strpos($state, 'msgstr[') !== false)) {
+									if (!isset($entry[$state])) {
+										throw new \Exception('Missing state:' . $state);
+									}
+									if (is_string($entry[$state])) {
+										// Convert it to array
+										$entry[$state] = array($entry[$state]);
+									}
+									$entry[$state][] = $line;
+								}
+								elseif ($key[0] == '#' && $key[1] != ' ') {
+									throw new \Exception(
+										'PoParser: Parse error! Comments must have a space after them on line ' . ($lineNumber+1)
+									);
+								}
+								else {
+									throw new \Exception(
+										'PoParser: Parse error! Unknown key "' . $key . '" on line ' . ($lineNumber+1)
+									);
+								}
+
                         }
                     }
                     break;

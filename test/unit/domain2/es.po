@@ -114,7 +114,7 @@ msgstr "Mostrar Lista"
 msgid "Create New"
 msgstr "Crear Nuevo"
 
-#For QDateTimePicker control
+# For QDateTimePicker control
 msgid "Jan"
 msgstr "Ene"
 
