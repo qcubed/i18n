@@ -70,7 +70,7 @@ class SCFileTest extends SCTest
 	 * will exercise the part of the code that reads the PHP file.
 	 */
 	public function testFileUse() {
-		$str = \_t("item");
+		$str = \t("item");
 		$this->assertEquals('artículo', $str);
 	}
 
@@ -89,7 +89,7 @@ class SCFileTest extends SCTest
 		TService::instance()->setLanguage('ru');
 		TService::instance()->setLanguage('es'); // reload from php files
 
-		$str = \_t("Yes", "dom1");
+		$str = \t("Yes", "dom1");
 		$this->assertEquals('No', $str);	// using our badly mangled version of the php file
 
 		clearstatcache(true);
@@ -98,7 +98,7 @@ class SCFileTest extends SCTest
 		TService::instance()->setLanguage('ru');
 		TService::instance()->setLanguage('es'); // reload from po files
 
-		$str = \_t("Yes", "dom1");
+		$str = \t("Yes", "dom1");
 		$this->assertEquals('Si', $str);	// using the touched po file, since its newer
 
 
@@ -109,7 +109,7 @@ class SCFileTest extends SCTest
 		TService::instance()->setLanguage('ru');
 		TService::instance()->setLanguage('es'); // reload from php files
 
-		$str = \_t("Yes", "dom1");
+		$str = \t("Yes", "dom1");
 		$this->assertEquals('Si', $str);	// using the php file instead of our sucky one, and the original po file was in fact processed and saved
 
 	}

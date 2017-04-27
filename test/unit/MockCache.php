@@ -23,7 +23,7 @@ class MockCache implements SimpleCache\CacheInterface {
 	 */
 	public function get($key, $default = null) {
 		if (strlen($key ) > 64) {    // not all caches are this way, but since its spec, we do this
-			throw Psr\SimpleCache\InvalidArgumentException("Key length is too big for spec.");
+			throw new InvalidArgumentException("Key length is too big for spec.");
 		}
 
 		if (isset($this->cache[$key])) {
@@ -50,7 +50,7 @@ class MockCache implements SimpleCache\CacheInterface {
 	 */
 	public function set($key, $value, $ttl = null) {
 		if (strlen($key ) > 64) {    // not all caches are this way, but since its spec, we do this
-			throw Psr\SimpleCache\InvalidArgumentException("Key length is too big for spec.");
+			throw new InvalidArgumentException("Key length is too big for spec.");
 		}
 
 		$this->cache[$key] = $value;
@@ -126,7 +126,7 @@ class MockCache implements SimpleCache\CacheInterface {
 	public function setMultiple($values, $ttl = null) {
 		foreach ($values as $key=>$value) {
 			if (strlen($key ) > 64) {    // not all caches are this way, but since its spec, we do this
-				throw Psr\SimpleCache\InvalidArgumentException("Key length is too big for spec.");
+				throw new InvalidArgumentException("Key length is too big for spec.");
 			}
 
 			$this->cache[$key] = $value;
@@ -148,7 +148,7 @@ class MockCache implements SimpleCache\CacheInterface {
 	public function deleteMultiple($keys) {
 		foreach ($keys as $key) {
 			if (strlen($key ) > 64) {    // not all caches are this way, but since its spec, we do this
-				throw Psr\SimpleCache\InvalidArgumentException("Key length is too big for spec.");
+				throw new InvalidArgumentException("Key length is too big for spec.");
 			}
 
 			unset($this->cache[$key]);
@@ -173,7 +173,7 @@ class MockCache implements SimpleCache\CacheInterface {
 	 */
 	public function has($key) {
 		if (strlen($key ) > 64) {    // not all caches are this way, but since its spec, we do this
-			throw Psr\SimpleCache\InvalidArgumentException("Key length is too big for spec.");
+			throw new InvalidArgumentException("Key length is too big for spec.");
 		}
 
 		return isset($this->cache[$key]);

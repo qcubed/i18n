@@ -17,7 +17,6 @@ class PoParserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test reading default options
-     * @return [type] [description]
      */
     public function testGetDefaultOptions()
     {
