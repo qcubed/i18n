@@ -47,7 +47,7 @@
  * 									to a context in the PO file.
  * @return string					The translated string, or the msgId if no translation is found.
  */
-function _t($strMsgId, $strDomain = null, $strContext = null)
+function t($strMsgId, $strDomain = null, $strContext = null)
 {
 	return \QCubed\I18n\TranslationService::instance()->translate($strMsgId, $strDomain, $strContext);
 }
@@ -71,7 +71,7 @@ function _t($strMsgId, $strDomain = null, $strContext = null)
  * 									to a context in the PO file.
  * @return string					The translated string, or the msgId if no translation is found.
  */
-function _tp($strMsgId, $strMsgId_plural, $intNum, $strDomain = null, $strContext = null)
+function tp($strMsgId, $strMsgId_plural, $intNum, $strDomain = null, $strContext = null)
 {
 	return \QCubed\I18n\TranslationService::instance()->translatePlural(
 		$strMsgId,

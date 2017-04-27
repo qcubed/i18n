@@ -23,7 +23,7 @@ const I18N_DOMAIN = 'qcubed/i18n'; // replace this with your package name
  * @param string|null $strContext	Context string, if the same string gets translated in different ways depending on context
  * @return string
  */
-function _t($strMsgId, $strContext = null)
+function t($strMsgId, $strContext = null)
 {
 	if (class_exists("\\QCubed\\I18n\\TranslationService") && \QCubed\I18n\TranslationService::instance()->translator()) {
 		if (!defined (I18N_DOMAIN . '__BOUND')) {
@@ -45,7 +45,7 @@ function _t($strMsgId, $strContext = null)
  * @param string|null $strContext	Context if needed
  * @return string
  */
-function _tp($strMsgId, $strMsgId_plural, $intNum, $strContext = null)
+function tp($strMsgId, $strMsgId_plural, $intNum, $strContext = null)
 {
 	if (class_exists("\\QCubed\\I18n\\TranslationService") && \QCubed\I18n\TranslationService::instance()->translator()) {
 		if (!defined (I18N_DOMAIN . '__BOUND')) {
