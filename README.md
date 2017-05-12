@@ -1,4 +1,4 @@
-#QCubed\i18n
+# QCubed\i18n
 An attempt to put together a comprehensive, standalone language translation tool for PHP.
 
 This was originally a fork of the excellent work by Raúl Ferràs (raul.ferras@gmail.com  
@@ -6,7 +6,7 @@ https://github.com/raulferras/PHP-po-parser)
 That code has been moved to its own section of this repository for maintainability, 
 and is also licensed under MIT. This project builds on that work.
 
-##Why another translation tool?
+## Why another translation tool?
 There are lots of translation tools available on the internet for PHP. The problem is they
 are scattered all over, embedded deep within existing frameworks, and only solve a part
 of the problem, and sometimes not very well.
@@ -20,7 +20,7 @@ operating system.
 There is a php-geettext, which improves things a little, but its not quite comprehensive, 
 and still requires .mo files to operate.
 
-##Goals
+## Goals
 - **Standalone**. Anyone can use it without needing other products. It currently is impemented at
 the top layer as a singleton, but this can be easily modified to use an injection container if preferred.
 - **Composer compatible**. .PO language files can now be distributed with composer libraries
@@ -31,7 +31,7 @@ package to get to its own translations.
 - **Standards Compliant**. PSR-1, PSR-2 and PSR-4 compatible, with a support module that uses a
 PSR-16 SimpleCache for caching (more on this below).
 
-##Implementations
+## Implementations
 Detailed descriptions of each implementation is available in the header of each file. 
 These are described in general below.
 
@@ -39,11 +39,11 @@ You are expected to include the *i18n.inc.php* file that is in the tools directo
 project so that you can directly use the _t and _tp functions there in your source code to
 call for translations. This will make everything easy to use.
 
-###GettextTranslator
+### GettextTranslator
 Uses the GNU gettext translation module buiit-in to PHP. Not ideal, but if you have .mo files,
 its a good way to go.
 
-###SimpleCacheTranslator
+### SimpleCacheTranslator
 Can use a PSR-16 compliant simple cache as a store for translations (we are working on
 an APCu and Redis implementation of these now.) Directly reads .PO files from a
 directory. Will work without a cache, but its better if your provide one.
@@ -51,8 +51,8 @@ directory. Will work without a cache, but its better if your provide one.
 Supply a temp directory, and it will convert the .po files into json and cache the json,
 making subsequent reads faster.
 
-##Typical Use
-###Setup
+## Typical Use
+### Setup
 ```php
 $cache = new MyCache();
 $translator = new \QCubed\I18n\SimpleCacheTranslator($cache);
@@ -67,7 +67,7 @@ $translator->bindDomain('package/subpackage', __VENDOR_DIR__ . "/package/subpack
 \QCubed\I18n\TranslationService::instance()->setLanguage('es'); //Make a particular language the active language.
 ```
 
-###Including the helper library
+### Including the helper library
 For applications:
 ```php
 include ("i18n-app.inc.php");
@@ -78,7 +78,7 @@ If you are developing a library to be used by other applications:
 include ("i18n-lib.inc.php");
 ```
 
-###Getting a translation
+### Getting a translation
 ```php
 $str = _t("Hello");	// translate Hello into the currently active translation using the default domain (that is, the .po file from your project for the default language)
 $str = _t("Hello", "package/subpackage", "a context"); // get a translation using a domain and context
@@ -86,7 +86,7 @@ $str = _tp("A Hello to your", "Many hellos to you", $n);	// Do a plural translat
 $str = _tp("A Hello to your", "Many hellos to you", $n, "package/subpackage", "a context");	// Do a plural translation based on the integer $n with domain and context
 ```
 
-##RoadMap
+## RoadMap
 * Implement a version based on https://github.com/sevenval/SHMT for super-fast translations.
 * Suck in some code that will search through PHP files and build a .pot file. The code is out
 there somewhere already for this. Try php-gettext first.
