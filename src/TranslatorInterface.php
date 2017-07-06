@@ -70,6 +70,13 @@ interface TranslatorInterface {
 	 */
 	public function setLanguage ($strLanguage, $strCountry);
 
+    /**
+     * Return the current locale setting as a string.
+     *
+     * @return string
+     */
+	public function getLocale();
+
 	/**
 	 * Tell us where to find the translations for a particular directory. Some translators will support multiple
 	 * charsets, and some only UTF-8.

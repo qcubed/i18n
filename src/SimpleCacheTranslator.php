@@ -203,6 +203,16 @@ class SimpleCacheTranslator implements TranslatorInterface
     }
 
     /**
+     * Returns the current locale as a string.
+     *
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->strLocale;
+    }
+
+    /**
      * Translate the given message.
      *
      * @param string $strMsgId

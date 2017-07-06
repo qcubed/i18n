@@ -173,4 +173,14 @@ class GettextTranslator implements TranslatorInterface {
 		putenv("LANG=" . $locale); //ight need LANGUAGE setting too.
 		setlocale(LC_ALL, $locale);
 	}
+
+    /**
+     * Return the current locale setting.
+     *
+     * @return string
+     */
+	public function getLocale()
+    {
+        return setlocale(LC_ALL, 0);
+    }
 }
