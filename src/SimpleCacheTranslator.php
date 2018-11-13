@@ -450,7 +450,7 @@ class SimpleCacheTranslator implements TranslatorInterface
             if (!$this->translations) {
                 $this->translations = $a;
             } else {
-                $this->translations = array_merge_recursive($this->translations, $a);
+                $this->translations = array_merge($this->translations, $a);
             }
         }
     }
