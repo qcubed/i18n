@@ -625,7 +625,11 @@ class SimpleCacheTranslator implements TranslatorInterface
         // Stackexhchange lore suggests that json encode is the fastest way to do this using standard PHP calls,
         // though igbinary may be even faster, but we don't want to make that a dependency at this point.
         $strEncodedData = json_encode($data);
-        file_put_contents($this->getTempFileName($strDomain), $strEncodedData, LOCK_EX);
+        if($strEncodedData) {
+			file_put_contents($this->getTempFileName($strDomain), $strEncodedData, LOCK_EX);
+		} else {
+			assert(false, 'Translation cannot be json_encoded, check the source file for domain ' . $strDomain . '. Original json error: ' . json_last_error_msg());
+		}
     }
 
     /**
